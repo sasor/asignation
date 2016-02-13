@@ -25,7 +25,6 @@ Asign.methods.catch_data_data = function(ev){
 	Asign.vars.pseudoMatriz = [];
 	$('#js-form-matriz input[type=text]').each(Asign.methods.create_pseudo_matriz);
 
-	// Asign.methods.create_definitive_matriz(Asign.vars.pseudoMatriz);
 	Asign.main();
 }
 
@@ -33,7 +32,3 @@ Asign.methods.catch_data_data = function(ev){
 Asign.methods.create_pseudo_matriz = function(){
 	Asign.vars.pseudoMatriz.push(Number($(this).val()));
 }
-
-/*Asign.methods.create_definitive_matriz = function(pseudo){
-	Asign.vars.matrix = _.chunk(pseudo, Asign.vars.machines);
-}*/

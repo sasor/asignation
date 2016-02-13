@@ -1,4 +1,12 @@
 Asign.main = function(){
+	execBalanceo();
+}
+
+var execBalanceo = function(){
+		if(!isBalanced()){ 
+			toBalance(Asign.vars.tasks, Asign.vars.machines);
+		}	
+		buildMatriz();
 }
 
 /**
@@ -36,15 +44,6 @@ var toBalance = function(r, c){
 	}
 }
 
-/** 
-	@function Encuentra el elemento más pequeño en un array 
-	@params [array]
-	@return [number] Min value of @params
-	*/
-var minValue = function(vector){
-	return Math.min.apply(null,vector);
-}
-
 /**
 	@function Construye la matriz objetivo en base a la pseudoMatriz
 	@params [No params]
@@ -52,6 +51,29 @@ var minValue = function(vector){
 var buildMatriz = function(){
 	Asign.vars.matriz = [];
 	do{
-		Asign.vars.matriz.push(Asign.vars.pseudoMatriz.splice(0,Asign.vars.machines));
+		if(Asign.vars.tasks < Asign.vars.machines){
+			Asign.vars.matriz.push(Asign.vars.pseudoMatriz.splice(0,Asign.vars.machines));
+		}
+		else{
+			Asign.vars.matriz.push(Asign.vars.pseudoMatriz.splice(0,Asign.vars.tasks));
+		}
 	} while(Asign.vars.pseudoMatriz.length > 0);
+}
+
+/***/
+var reducirElements = function(collection){
+	collection.forEach(function(v, i, c){
+		var min = minValue(v);		
+		var aux = v.map(function(x){ return x - min;	});
+		c[i] = aux;
+	});	
+}
+
+/** 
+	@function Encuentra el elemento más pequeño en un array 
+	@params [array]
+	@return [number] Min value of @params
+	*/
+var minValue = function(vector){
+	return Math.min.apply(null,vector);
 }
