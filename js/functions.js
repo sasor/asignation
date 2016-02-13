@@ -13,7 +13,7 @@ Asign.methods.catch_data = function(ev){
 Asign.methods.draw_matriz = function(t, m){
 	for(var i=0; i<t; i++){
 		for(var j=0; j<m; j++){
-			$('#js-form-matriz').append('<input type="text" row="'+i+'" column="'+j+'"/>');
+			$('#js-form-matriz').append('<input type="text" row="'+i+'" column="'+j+'" required/>');
 		}	
 	}		
 	$('#js-form-matriz').append('<input type="submit" value="solve"/>');
