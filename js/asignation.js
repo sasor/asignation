@@ -1,5 +1,6 @@
 Asign.main = function(){
 	execBalanceo();
+	setMatriz();
 }
 
 var execBalanceo = function(){
@@ -7,6 +8,15 @@ var execBalanceo = function(){
 			toBalance(Asign.vars.tasks, Asign.vars.machines);
 		}	
 		buildMatriz();
+}
+
+var setMatriz = function(){
+	var counter = 0;
+	while(counter<2){
+		reducirElements(Asign.vars.matriz);
+		changePlaces(Asign.vars.matriz);
+		counter++;
+	}
 }
 
 /**
@@ -60,7 +70,21 @@ var buildMatriz = function(){
 	} while(Asign.vars.pseudoMatriz.length > 0);
 }
 
-/***/
+/** 
+	@function Encuentra el elemento más pequeño en un array 
+	@params [array]
+	@return [number] Min value of @params
+	*/
+var minValue = function(vector){
+	return Math.min.apply(null,vector);
+}
+
+/**
+	@function Resta el menor valor d/c elem segun paso 2 del algoritmo de 
+	asignacion.
+	@params [matriz]
+	@return [void]
+	*/
 var reducirElements = function(collection){
 	collection.forEach(function(v, i, c){
 		var min = minValue(v);		
@@ -69,11 +93,21 @@ var reducirElements = function(collection){
 	});	
 }
 
-/** 
-	@function Encuentra el elemento más pequeño en un array 
-	@params [array]
-	@return [number] Min value of @params
+/**
+	@function Modifica la matriz en base a los primeros elems d/c elemento en la
+	matriz.
+	@params [matriz]
+	@return [void] 
 	*/
-var minValue = function(vector){
-	return Math.min.apply(null,vector);
+var changePlaces = function(arr){
+	var aux_matriz = [];
+	var piece = [];	
+	while(arr[0].length > 0){
+		arr.forEach(function(v, i, c){
+			piece = piece.concat(v.splice(0,1));
+		});
+		aux_matriz.push(piece);
+		piece = [];
+	}
+	Asign.vars.matriz = aux_matriz;
 }
